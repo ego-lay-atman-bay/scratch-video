@@ -13,6 +13,7 @@ import os
 from pydub import AudioSegment
 from PIL import Image
 import filetype
+import wget
 
 assets = []
 project = {}
@@ -34,10 +35,10 @@ def getFrames(vid, output, rate=0.5, frameName='frame'):
         # image_last = cv2.imread(output + "/" + frameName + "-%d.png" % count)
         if not success:
             break
-        count += 1
         print('extracting frame ' + frameName + '-%d.png' % count)
         cv2.imwrite(output + "/" + frameName + "-%d.png" % count, image)     # save frame as PNG file
         frame += rate
+        count += 1
 
 def getAudio(video):
     audio = moviepy.editor.AudioFileClip(video)
@@ -142,7 +143,7 @@ def export():
 
 def scanVideo(path):
     files = os.listdir(path)
-    Tcl().call('lsort', '-dict', files)
+    files = Tcl().call('lsort', '-dict', files)
     for f in files:
         type = f.rpartition('.')[2]
         if not type == 'mp3':
@@ -179,6 +180,8 @@ def loadJson(path):
         for cst in target['costumes']:
             assets.append(['project/' + cst['md5ext'], cst['md5ext']])
 
+    print('json loaded')
+
 def exportVideo(videoPath, fps=10, costumeName='video'):
     try:
         fps = int(fps)
@@ -189,6 +192,33 @@ def exportVideo(videoPath, fps=10, costumeName='video'):
     getAudio(videoPath)
     project['targets'][1]['blocks']['e']['inputs']['VALUE'][1][1] = fps
     project['targets'][1]['blocks']['h']['inputs']['STRING1'][1][1] = costumeName + '-'
+
+def loadProject():
+    try:
+        print('loading project.json')
+        loadJson('project/project.json')
+    except:
+        print('could not load project.json\ncreating project folder')
+        try:
+            os.mkdir('project')
+        except:
+            print('project folder already exists')
+            pass
+
+        url = "https://ego-lay-atman-bay.github.io/scratch-video/project/video.sb3"
+        print('downloading ' + url)
+        file = root + '/project/video.sb3'
+        wget.download(url, file)
+        print('\nsuccessfully downloaded video.sb3')
+
+        print('extracting video.sb3')
+        with zipfile.ZipFile(file, 'r') as zip:
+            zip.printdir()
+            zip.extractall('project')
+            print('Done!')
+        
+        print('loading project.json')
+        loadJson('project/project.json')
 
 
 def main():
@@ -203,8 +233,7 @@ def main():
     except:
         print('failed to remove /video')
 
-
-    loadJson('project/project.json')
+    loadProject()
     file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4',filetypes=(("mp4 video", "*.mp4"),("mov video", "*.mov"),("All Files","*.*")))
     fps = input('fps (longer videos should have lower fps, shorter videos are fine to have a higher fps.):\n')
     exportVideo(file.name, fps, file.name.split("/")[-1].rpartition('.')[0])
