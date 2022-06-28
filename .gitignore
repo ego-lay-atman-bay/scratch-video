@@ -397,5 +397,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# unnecessary files/folders for the project
 export/
 video/
+export.sb3
