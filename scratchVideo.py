@@ -12,8 +12,9 @@ import moviepy.editor
 import os
 from pydub import AudioSegment
 from PIL import Image
-import filetype
+import mimetypes
 import wget
+import time
 
 assets = []
 project = {}
@@ -22,21 +23,30 @@ root = os.getcwd()
 # The only script that worked the way I wanted it to. Original script: https://stackoverflow.com/a/49321070/17129659 Thank you so much @Bence Kővári
 def getFrames(vid, output, rate=0.5, frameName='frame'):
     vidcap = cv2.VideoCapture(vid)
+    frames = vidcap.get(cv2.CAP_PROP_FRAME_COUNT)
+    fps = int(vidcap.get(cv2.CAP_PROP_FPS))
+    clip = moviepy.editor.VideoFileClip(vid)
+    seconds = clip.duration
+    print('durration: ' + str(seconds))
+    time.sleep(1)
     count = 0
     frame = 0
     if not os.path.isdir(output):
         os.mkdir(output)
     success = True
     while success:
-        vidcap.set(cv2.CAP_PROP_POS_MSEC,(frame*1000))      
+        vidcap.set(cv2.CAP_PROP_POS_MSEC,frame*1000)      
         success,image = vidcap.read()
+        print(cv2.CAP_PROP_POS_MSEC)
+        # print(success)
 
         ## Stop when last frame is identified
         # image_last = cv2.imread(output + "/" + frameName + "-%d.png" % count)
-        if not success:
-            break
+        print(frame)
         print('extracting frame ' + frameName + '-%d.png' % count)
         cv2.imwrite(output + "/" + frameName + "-%d.png" % count, image)     # save frame as PNG file
+        if frame > seconds:
+            break
         frame += rate
         count += 1
 
@@ -146,6 +156,7 @@ def scanVideo(path):
     files = Tcl().call('lsort', '-dict', files)
     for f in files:
         type = f.rpartition('.')[2]
+        print(mimetypes.guess_type(f))
         if not type == 'mp3':
             filepath = path + '/' + f
             resizeCostume(filepath)
