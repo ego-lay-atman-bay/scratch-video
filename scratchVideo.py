@@ -37,7 +37,7 @@ def getFrames(vid, output, rate=0.5, frameName='frame'):
     while success:
         vidcap.set(cv2.CAP_PROP_POS_MSEC,frame*1000)      
         success,image = vidcap.read()
-        print(cv2.CAP_PROP_POS_MSEC)
+        # print(cv2.CAP_PROP_POS_MSEC)
         # print(success)
 
         ## Stop when last frame is identified
