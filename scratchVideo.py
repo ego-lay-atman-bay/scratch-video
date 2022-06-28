@@ -157,7 +157,8 @@ def scanVideo(path):
     for f in files:
         type = f.rpartition('.')[2]
         print(mimetypes.guess_type(f))
-        if not type == 'mp3':
+        fileType = mimetypes.guess_type(f)
+        if fileType[0].split('/')[0] == 'image':
             filepath = path + '/' + f
             resizeCostume(filepath)
             with open(filepath, 'rb') as file:
@@ -171,7 +172,10 @@ def scanVideo(path):
             costume = {}
             costume['assetId'] = id
             costume['name'] = f.rpartition('.')[0]
-            costume['bitmapResolution'] = 2
+            if type ==  'svg':
+                costume['bitmapResolution'] = 1
+            else:
+                costume['bitmapResolution'] = 2
             costume['md5ext'] = id + '.' + type
             costume['dataFormat'] = type
             costume['rotationCenterX'] = w/2
