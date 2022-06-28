@@ -1,18 +1,18 @@
-import json
 import os
 import shutil
+import json
 import hashlib
-# import tkinter as tk
 from tkinter import Tcl, filedialog
 import zipfile
-# from datetime import timedelta
+
 import cv2
 import moviepy.editor
-# import numpy as np
-import os
 from pydub import AudioSegment
+
+# import numpy as np
 from PIL import Image
 import mimetypes
+
 import wget
 import time
 
@@ -43,10 +43,10 @@ def getFrames(vid, output, rate=0.5, frameName='frame'):
         ## Stop when last frame is identified
         # image_last = cv2.imread(output + "/" + frameName + "-%d.png" % count)
         print(frame)
+        if frame > seconds or not success:
+            break
         print('extracting frame ' + frameName + '-%d.png' % count)
         cv2.imwrite(output + "/" + frameName + "-%d.png" % count, image)     # save frame as PNG file
-        if frame > seconds:
-            break
         frame += rate
         count += 1
 
@@ -249,7 +249,9 @@ def main():
         print('failed to remove /video')
 
     loadProject()
-    file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4',filetypes=(("mp4 video", "*.mp4"),("mov video", "*.mov"),("All Files","*.*")))
+    videoTypes = (('video', ('*.mp4','*.mov','*.avi','*.flv')), ('all files', '*.*'))
+    file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4,*.mov,*.avi,*.flv',filetypes=videoTypes)
+    mimetypes.common_types
     fps = input('fps (longer videos should have lower fps, shorter videos are fine to have a higher fps.):\n')
     exportVideo(file.name, fps, file.name.split("/")[-1].rpartition('.')[0])
     scanVideo('video')
