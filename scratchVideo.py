@@ -6,7 +6,6 @@ from PIL import Image
 import mimetypes
 import wget
 from tkinter import Tcl, filedialog
-import tempfile
 
 import cv2
 import moviepy.editor
