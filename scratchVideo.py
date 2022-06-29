@@ -252,6 +252,13 @@ def exportVideo(videoPath, fps=10, costumeName='video'):
     setVar('costume name', costumeName + '-')
 
 def loadProject():
+    def extractProject():
+        print('extracting video.sb3')
+        with zipfile.ZipFile(file, 'r') as zip:
+            zip.printdir()
+            zip.extractall('project')
+            print('Done!')
+
     try:
         print('loading project.json')
         loadJson('project/project.json')
@@ -262,19 +269,18 @@ def loadProject():
         except:
             print('project folder already exists')
             pass
-
-        url = "https://ego-lay-atman-bay.github.io/scratch-video/project/video.sb3"
-        print('downloading ' + url)
-        file = root + '/project/video.sb3'
-        wget.download(url, file)
-        print('\nsuccessfully downloaded video.sb3')
-
-        print('extracting video.sb3')
-        with zipfile.ZipFile(file, 'r') as zip:
-            zip.printdir()
-            zip.extractall('project')
-            print('Done!')
         
+        try:
+            extractProject()
+        except:
+            print('project does not exist:')
+            url = "https://ego-lay-atman-bay.github.io/scratch-video/project/video.sb3"
+            print('downloading ' + url)
+            file = root + '/project/video.sb3'
+            wget.download(url, file)
+            print('\nsuccessfully downloaded video.sb3')
+            extractProject()
+
         print('loading project.json')
         loadJson('project/project.json')
 
