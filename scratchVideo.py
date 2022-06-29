@@ -1,38 +1,38 @@
 import os
 import shutil
 import json
-import hashlib
-from tkinter import Tcl, filedialog
 import zipfile
+from PIL import Image
+import mimetypes
+import wget
+from tkinter import Tcl, filedialog
+import tempfile
 
 import cv2
 import moviepy.editor
 from pydub import AudioSegment
 
-# import numpy as np
-from PIL import Image
-import mimetypes
-
-import wget
+import hashlib
 import time
 
 assets = []
 project = {}
 root = os.getcwd()
 
-# The only script that worked the way I wanted it to. Original script: https://stackoverflow.com/a/49321070/17129659 Thank you so much @Bence Kővári
 def getFrames(vid, output, rate=0.5, frameName='frame'):
     vidcap = cv2.VideoCapture(vid)
-    frames = vidcap.get(cv2.CAP_PROP_FRAME_COUNT)
-    fps = int(vidcap.get(cv2.CAP_PROP_FPS))
     clip = moviepy.editor.VideoFileClip(vid)
+
     seconds = clip.duration
     print('durration: ' + str(seconds))
     time.sleep(1)
+    
     count = 0
     frame = 0
+    
     if not os.path.isdir(output):
         os.mkdir(output)
+    
     success = True
     while success:
         vidcap.set(cv2.CAP_PROP_POS_MSEC,frame*1000)      
@@ -46,7 +46,9 @@ def getFrames(vid, output, rate=0.5, frameName='frame'):
         if frame > seconds or not success:
             break
         print('extracting frame ' + frameName + '-%d.png' % count)
-        cv2.imwrite(output + "/" + frameName + "-%d.png" % count, image)     # save frame as PNG file
+        name = output + '/' + frameName + '-%d.png' % count
+        print(name)
+        cv2.imwrite(name, image)     # save frame as PNG file
         frame += rate
         count += 1
 
@@ -235,8 +237,7 @@ def loadProject():
         print('loading project.json')
         loadJson('project/project.json')
 
-
-def main():
+def removeDirs():
     try:
         print('removing /export')
         shutil.rmtree('export')
@@ -248,14 +249,20 @@ def main():
     except:
         print('failed to remove /video')
 
+
+
+def main():
+    removeDirs()
+
     loadProject()
     videoTypes = (('video', ('*.mp4','*.mov','*.avi','*.flv')), ('all files', '*.*'))
     file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4,*.mov,*.avi,*.flv',filetypes=videoTypes)
     mimetypes.common_types
     fps = input('fps (longer videos should have lower fps, shorter videos are fine to have a higher fps.):\n')
     exportVideo(file.name, fps, file.name.split("/")[-1].rpartition('.')[0])
-    scanVideo('video')
+    scanVideo(root + '/video')
     export()
+    removeDirs()
 
 if __name__ == '__main__':
     main()
