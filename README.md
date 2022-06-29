@@ -3,8 +3,6 @@ A program to import a video into scratch.
 
 ## Installation
 
-# Installation instructions:
-
 1. Download `scratch-video.zip` from the [releases tab](https://github.com/ego-lay-atman-bay/scratch-video/releases)
 2. Unzip it into it's own folder (e.g. a folder called scratch-video)
 3. Make sure you have [Python 3](https://www.python.org/downloads/) installed
