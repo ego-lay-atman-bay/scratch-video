@@ -15,6 +15,6 @@ or if that doesn't work
 ```
 py -m pip install -r requirements.txt
 ```
-6. And now you're all set to run scratchVideo.py
+6. And now you're all set to run `scratchVideo.py`
 
 When you run it for the first time, it'll download the base project, and put it in a folder called `project`. It won't download it again, unless it detects `project.json` and `video.sb3` are missing.
