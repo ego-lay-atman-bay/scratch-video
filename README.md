@@ -3,16 +3,20 @@ A program to import a video into scratch.
 
 ## Installation
 
-1. Make sure [python 3](https://www.python.org/) is installed
-2. Open the command prompt
-3. Enter
+# Installation instructions:
 
+1. Download `scratch-video.zip` from the [releases tab](https://github.com/ego-lay-atman-bay/scratch-video/releases)
+2. Unzip it into it's own folder (e.g. a folder called scratch-video)
+3. Make sure you have [Python 3](https://www.python.org/downloads/) installed
+4. Open your command prompt in the scratch-video folder
+5. Enter
 ```
 pip install -r requirements.txt
 ```
-or if that doesn't work, run this
+or if that doesn't work 
 ```
 py -m pip install -r requirements.txt
 ```
+6. And now you're all set to run scratchVideo.py
 
-4. After it finishes installing the modules, run `scratchVideo.py` either in the command prompt, or by double clicking the file.
+When you run it for the first time, it'll download the base project, and put it in a folder called `project`. It won't download it again, unless it detects `project.json` and `video.sb3` are missing.
