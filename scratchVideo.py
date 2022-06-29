@@ -146,6 +146,7 @@ def export():
     while save_path == '':
         confirm = input('Are you sure you want to cancel? (y/n): ')
         if confirm == 'y' or confirm == 'yes':
+            removeDirs()
             exit()
         save_path = filedialog.asksaveasfilename(title='save project', defaultextension='*.sb3', initialfile='export.sb3', filetypes=(('scratch 3 project','*.sb3'),('zipped folder','*.zip')))
         
