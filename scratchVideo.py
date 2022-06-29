@@ -143,6 +143,12 @@ def export():
     file_paths = getFilePath(root + '/export')
 
     save_path = filedialog.asksaveasfilename(title='save project', defaultextension='*.sb3', initialfile='export.sb3', filetypes=(('scratch 3 project','*.sb3'),('zipped folder','*.zip')))
+    while save_path == '':
+        confirm = input('Are you sure you want to cancel? (y/n): ')
+        if confirm == 'y' or confirm == 'yes':
+            exit()
+        save_path = filedialog.asksaveasfilename(title='save project', defaultextension='*.sb3', initialfile='export.sb3', filetypes=(('scratch 3 project','*.sb3'),('zipped folder','*.zip')))
+        
     with zipfile.ZipFile(save_path, 'w') as zip:
         for file in file_paths:
             zipname = os.path.basename(file)
@@ -198,6 +204,42 @@ def loadJson(path):
 
     print('json loaded')
 
+def setVar(var, value, scope='global', sprite='Sprite1'):
+    print('setting var: ' + var + ' to: ' + str(value) + '\nscope: ' + scope + '\nsprite: ' + sprite)
+    target = 0
+    if scope == 'global':
+        isStage = False
+        while not isStage:
+            isStage = project['targets'][target]['isStage']
+            if isStage:
+                print('found stage')
+                break
+            target += 1
+        
+    elif scope == 'local':
+        for item in project['targets']:
+            if not project['targets'][target]['isStage']:
+                if project['targets'][target]['name'] == sprite:
+                    print('found sprite target: ' + str(target))
+                    break
+            target += 1
+
+    if target > len(project['targets']):
+        raise('target not found')
+
+    trueVar = ''
+
+    for item in project['targets'][target]['variables'].items():
+        if item[1][0] == var:
+            trueVar = item[0]
+            break
+    
+    print('found var id: ' + trueVar)
+    if trueVar == '':
+        raise('Variable not ' + var + ' not found')
+    
+    project['targets'][target]['variables'][trueVar][1] = value
+
 def exportVideo(videoPath, fps=10, costumeName='video'):
     try:
         fps = int(fps)
@@ -206,8 +248,8 @@ def exportVideo(videoPath, fps=10, costumeName='video'):
     getFrames(videoPath,'video', 1/fps, costumeName)
     # exportFrames(videoPath, fps, costumeName)
     getAudio(videoPath)
-    project['targets'][1]['blocks']['e']['inputs']['VALUE'][1][1] = fps
-    project['targets'][1]['blocks']['h']['inputs']['STRING1'][1][1] = costumeName + '-'
+    setVar('fps', fps)
+    setVar('costume name', costumeName + '-')
 
 def loadProject():
     try:
@@ -248,15 +290,15 @@ def removeDirs():
     except:
         print('failed to remove /video')
 
-
-
 def main():
     removeDirs()
 
     loadProject()
     videoTypes = (('video', ('*.mp4','*.mov','*.avi','*.flv')), ('all files', '*.*'))
     file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4,*.mov,*.avi,*.flv',filetypes=videoTypes)
-    mimetypes.common_types
+    if file == None:
+        exit()
+    
     fps = input('fps (longer videos should have lower fps, shorter videos are fine to have a higher fps.):\n')
     exportVideo(file.name, fps, file.name.split("/")[-1].rpartition('.')[0])
     scanVideo(root + '/video')

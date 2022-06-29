@@ -1,1 +1,296 @@
-{"targets":[{"isStage":true,"name":"Stage","variables":{"!zXcgCF]8gGI:$d}Wh8+":["fps",10]},"lists":{},"broadcasts":{},"blocks":{},"comments":{},"currentCostume":0,"costumes":[{"assetId":"cd21514d0531fdffb22204e0ec5ed84a","name":"backdrop1","md5ext":"cd21514d0531fdffb22204e0ec5ed84a.svg","dataFormat":"svg","rotationCenterX":240,"rotationCenterY":180}],"sounds":[],"volume":100,"layerOrder":0,"tempo":60,"videoTransparency":50,"videoState":"on","textToSpeechLanguage":null},{"isStage":false,"name":"Sprite1","variables":{},"lists":{},"broadcasts":{},"blocks":{"j":{"opcode":"event_whenflagclicked","next":"d","parent":null,"inputs":{},"fields":{},"shadow":false,"topLevel":true,"x":28,"y":40},"d":{"opcode":"looks_show","next":"e","parent":"j","inputs":{},"fields":{},"shadow":false,"topLevel":false},"e":{"opcode":"data_setvariableto","next":"a","parent":"d","inputs":{"VALUE":[1,[10,"10"]]},"fields":{"VARIABLE":["fps","!zXcgCF]8gGI:$d}Wh8+"]},"shadow":false,"topLevel":false},"a":{"opcode":"sound_play","next":"f","parent":"e","inputs":{"SOUND_MENU":[1,"k"]},"fields":{},"shadow":false,"topLevel":false},"k":{"opcode":"sound_sounds_menu","next":null,"parent":"a","inputs":{},"fields":{"SOUND_MENU":["Audio",null]},"shadow":true,"topLevel":false},"f":{"opcode":"sensing_resettimer","next":"g","parent":"a","inputs":{},"fields":{},"shadow":false,"topLevel":false},"g":{"opcode":"control_forever","next":null,"parent":"f","inputs":{"SUBSTACK":[2,"b"]},"fields":{},"shadow":false,"topLevel":false},"b":{"opcode":"looks_switchcostumeto","next":null,"parent":"g","inputs":{"COSTUME":[3,"h","l"]},"fields":{},"shadow":false,"topLevel":false},"h":{"opcode":"operator_join","next":null,"parent":"b","inputs":{"STRING1":[1,[10,"video-"]],"STRING2":[3,"i",[10,"banana"]]},"fields":{},"shadow":false,"topLevel":false},"i":{"opcode":"operator_mathop","next":null,"parent":"h","inputs":{"NUM":[3,"c",[4,""]]},"fields":{"OPERATOR":["floor",null]},"shadow":false,"topLevel":false},"c":{"opcode":"operator_divide","next":null,"parent":"i","inputs":{"NUM1":[3,"m",[4,""]],"NUM2":[3,"n",[4,"0.2"]]},"fields":{},"shadow":false,"topLevel":false},"m":{"opcode":"sensing_timer","next":null,"parent":"c","inputs":{},"fields":{},"shadow":false,"topLevel":false},"n":{"opcode":"operator_divide","next":null,"parent":"c","inputs":{"NUM1":[1,[4,"1"]],"NUM2":[3,[12,"fps","!zXcgCF]8gGI:$d}Wh8+"],[4,""]]},"fields":{},"shadow":false,"topLevel":false},"l":{"opcode":"looks_costume","next":null,"parent":"b","inputs":{},"fields":{"COSTUME":["costume1",null]},"shadow":true,"topLevel":false}},"comments":{},"currentCostume":0,"costumes":[{"assetId":"b4ab6b3b69de1bc3ed6a94ace172a0b0","name":"costume1","bitmapResolution":1,"md5ext":"b4ab6b3b69de1bc3ed6a94ace172a0b0.svg","dataFormat":"svg","rotationCenterX":44,"rotationCenterY":44}],"sounds":[],"volume":100,"layerOrder":1,"visible":true,"x":0,"y":0,"size":100,"direction":90,"draggable":false,"rotationStyle":"all around"}],"monitors":[],"extensions":[],"meta":{"semver":"3.0.0","vm":"0.2.0","agent":""}}
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "!zXcgCF]8gGI:$d}Wh8+": [
+                    "fps",
+                    10
+                ],
+                "(ViC-`2m{.DOXRmTGQB1": [
+                    "costume name",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Video",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "i": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "d",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 28,
+                    "y": 40
+                },
+                "d": {
+                    "opcode": "looks_show",
+                    "next": "a",
+                    "parent": "i",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a": {
+                    "opcode": "sound_play",
+                    "next": "e",
+                    "parent": "d",
+                    "inputs": {
+                        "SOUND_MENU": [
+                            1,
+                            "j"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "sound_sounds_menu",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "SOUND_MENU": [
+                            "Audio",
+                            null
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "sensing_resettimer",
+                    "next": "f",
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "control_forever",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {
+                        "SUBSTACK": [
+                            2,
+                            "b"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "looks_switchcostumeto",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {
+                        "COSTUME": [
+                            3,
+                            "g",
+                            "k"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "operator_join",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {
+                        "STRING1": [
+                            3,
+                            [
+                                12,
+                                "costume name",
+                                "(ViC-`2m{.DOXRmTGQB1"
+                            ],
+                            [
+                                10,
+                                "video-"
+                            ]
+                        ],
+                        "STRING2": [
+                            3,
+                            "h",
+                            [
+                                10,
+                                "banana"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "operator_mathop",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {
+                        "NUM": [
+                            3,
+                            "c",
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "OPERATOR": [
+                            "floor",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "operator_divide",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            "l",
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            "m",
+                            [
+                                4,
+                                "0.2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "sensing_timer",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "m": {
+                    "opcode": "operator_divide",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "fps",
+                                "!zXcgCF]8gGI:$d}Wh8+"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "k": {
+                    "opcode": "looks_costume",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "COSTUME": [
+                            "costume1",
+                            null
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "b4ab6b3b69de1bc3ed6a94ace172a0b0",
+                    "md5ext": "b4ab6b3b69de1bc3ed6a94ace172a0b0.svg",
+                    "rotationCenterX": 44,
+                    "rotationCenterY": 44
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": ""
+    }
+}
