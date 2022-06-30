@@ -255,6 +255,7 @@ def exportVideo(videoPath, fps=10, costumeName='video'):
 def loadProject():
     def extractProject():
         print('extracting video.sb3')
+        file = root + '/project/video.sb3'
         with zipfile.ZipFile(file, 'r') as zip:
             zip.printdir()
             zip.extractall('project')
