@@ -303,7 +303,7 @@ def main():
 
     loadProject()
     videoTypes = (('video', ('*.mp4','*.mov','*.avi','*.flv','*.mkv')), ('all files', '*.*'))
-    file = filedialog.askopenfile(mode='r', title='choose video',defaultextension='*.mp4,*.mov,*.avi,*.flv',filetypes=videoTypes)
+    file = filedialog.askopenfile(mode='r', title='choose video', defaultextension='*.mp4,*.mov,*.avi,*.flv',filetypes=videoTypes)
     if file == None:
         exit()
     
